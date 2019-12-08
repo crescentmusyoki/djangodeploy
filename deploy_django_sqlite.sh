@@ -337,6 +337,15 @@ sudo service nginx reload
 
 echo
 
+
+echo "Set up ssl..."
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install python-certbot-nginx
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+sudo certbot --nginx -d $DOMAINNAME
+
+
 echo "Deployment complete!"
 
 
