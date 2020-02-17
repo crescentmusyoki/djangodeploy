@@ -133,11 +133,11 @@ pip install --upgrade pip
 EOF
 
 # check if git exists
-if [[ -d "/home/$APPNAME/$PROJECT_NAME" ]]
+if [[ -d "/home/$APPNAME/$APPNAME" ]]
 then
     echo "Git repo exists."
     echo "Performing a git pull..."
-    cd /home/$APPNAME/$PROJECT_NAME/
+    cd /home/$APPNAME/$APPNAME/
     git add .
     git commit -m "Server stage before deployment"
     git pull origin master
@@ -152,7 +152,7 @@ EOF
 echo
 
 pwd
-cd /home/$APPNAME/$PROJECT_NAME/
+cd /home/$APPNAME/$APPNAME/
 pwd
 git clone $GIT .
 su -l $APPNAME << EOF
@@ -180,7 +180,7 @@ EOF
 echo
 
 echo "Setting media files folder permissions..."
-sudo chmod -R 777 /home/$APPNAME/$PROJECT_NAME/media/
+sudo chmod -R 777 /home/$APPNAME/$APPNAME/media/
 
 echo
 
@@ -196,7 +196,7 @@ cat > /tmp/gunicorn_start << EOF
 
 
 NAME="$APPNAME"
-DIR=/home/$APPNAME/$PROJECT_NAME
+DIR=/home/$APPNAME/$APPNAME
 USER=$APPNAME
 GROUP=$APPNAME
 WORKERS=3
@@ -306,7 +306,7 @@ server {
     error_log /home/$APPNAME/logs/nginx-error.log;
 
     location /static/ {
-        alias /home/$APPNAME/$PROJECT_NAME/static/;
+        alias /home/$APPNAME/$APPNAME/static/;
     }
 
     # checks for static file, if not found proxy to app
