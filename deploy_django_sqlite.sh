@@ -15,7 +15,8 @@ APPNAME=$1
 DOMAINNAME=$2
 GIT=$3
 PROJECT_NAME=$4
-PYTHON_VERSION=$5
+DB_PASSWORD=$5
+PYTHON_VERSION=$6
 
 # check appname was supplied as argument
 if [[ "$APPNAME" == "" ]]; then
@@ -55,7 +56,7 @@ echo "Setup mysql..."
 apt-get install python3-dev libmysqlclient-dev
 apt-get install build-essential
 mysql -u root -p  << EOF
-GRANT ALL PRIVILEGES ON *.* TO '$APPNAME'@'localhost' IDENTIFIED BY '#VU4jFgek';
+GRANT ALL PRIVILEGES ON *.* TO '$APPNAME'@'localhost' IDENTIFIED BY '$DB_PASSWORD';
 CREATE DATABASE IF NOT EXISTS $APPNAME;
 SHOW DATABASES;
 EOF
